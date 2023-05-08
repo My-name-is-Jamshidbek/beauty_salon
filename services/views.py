@@ -40,6 +40,25 @@ def services(request):
     return render(request, 'services.html', context)
 
 
+def service(request, pk):
+    """
+    services page view
+    :param request:
+    :return:
+    """
+    category = Category.objects.get(id=pk)
+    categories = Category.objects.all()
+
+    photos = category.photos.filter(category_id=pk)
+    photo_list = [photo.image.url for photo in photos]
+    context = {
+        "photo_list": photo_list,
+        "category": category,
+        "categories": categories,
+    }
+    return render(request, 'service.html', context)
+
+
 def prices(request):
     """
     prices view

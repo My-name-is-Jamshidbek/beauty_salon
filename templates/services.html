@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'style_s.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+        <title>Go'zallik saloni</title>
+    </head>
+    <body>
+        <!-- header  -->
+        <header>
+            <div class="header__1">
+                <img src="{% static 'img/logo.jpg' %}" alt="logo" />
+                <span>Go'zallik saloni</span>
+            </div>
+            <div class="search">
+                <i class="fa fa-search"></i>
+                <input type="search" id="" placeholder="Qidiruv..." />
+            </div>
+            <div class="item">
+              <a href="#"><i class="fa fa-phone-volume"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+        </header>
+        <div class="header__2">
+            <ul>
+                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                <li><a href="{% url 'services' %}" class="active">Maishiy Xizmatlar</a></li>
+                <li><a href="{% url 'prices' %}">Narxlar</a></li>
+                <li><a href="{% url 'contact' %}">Manzil</a></li>
+            </ul>
+        </div>
+
+        <!-- header  -->
+        <!-- main  -->
+        <main>
+            <div class="makiaj" id="makiaj">
+                <div class="makiaj__item">
+                    {% for category in categories %}
+                        <a href="{% url 'service' category.id %}">{{category.title}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- main  -->
+            {% for category, photos in category_data.items %}
+                <h2>{{ category }}</h2>
+                <div class="makiaj__img">
+                    {% for photo in photos %}
+                        <img src="{{ photo }}" alt="" />
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </main>
+    </body>
+</html>
